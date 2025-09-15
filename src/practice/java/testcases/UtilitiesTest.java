@@ -1,0 +1,53 @@
+package practice.java.testcases;
+
+import static org.junit.Assert.*;
+
+public class UtilitiesTest {
+	
+	private Utilities util;
+	
+	@org.junit.Before
+	public void setup() {
+		util=new Utilities();
+		
+	}
+
+	@org.junit.Test
+	public void everyNthChar() throws Exception {
+		char[] output=util.everyNthChar(new char[]{'h','e','l','l','o'}, 2);
+		assertArrayEquals(new char [] {'e','l'},output);
+		char[] output2=util.everyNthChar(new char[]{'h','e','l','l','o'}, 8);
+		assertArrayEquals(new char []{'h','e','l','l','o'},output2);
+		
+	}
+	
+	@org.junit.Test
+	public void removePairs() throws Exception {
+		assertEquals("ABCDEF",util.removePairs("AABCDDEFF"));
+		assertEquals("ABCABDEF",util.removePairs("ABCCABDEEF"));
+		assertEquals("A",util.removePairs("A"));
+		assertEquals("",util.removePairs(""));
+		assertNull("Did not get null in returned while passed null",util.removePairs(null));
+		
+	}
+	
+	@org.junit.Test
+	public void convertor() throws Exception {
+		assertEquals(300, util.converter(10, 5));
+		
+		}
+	
+	@org.junit.Test(expected=ArithmeticException.class)
+	public void convertor_arithmeticException() throws Exception{
+		util.converter(10, 0);
+		
+	}
+	
+	@org.junit.Test
+	public void nullIfOddLength() throws Exception {
+		assertNull(null,util.nullIfOddLength("odd"));
+		assertNotNull(null,util.nullIfOddLength("Even"));
+	
+	}
+
+}

@@ -1,0 +1,34 @@
+package practice.java.streams;
+
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+public class StreamIntermediate {
+
+	public static void main(String[] args) {
+		
+		IntStream.iterate((int)'A', i -> i <= (int) 'z',i -> i + 1)
+		.filter(Character::isAlphabetic)
+		.map(Character::toUpperCase)
+		.distinct()
+		//.dropWhile(i -> Character.toUpperCase(i) <='E' )
+		//.takeWhile(i -> i < 'a')
+		//.skip(5)
+		//.filter(i -> Character.toUpperCase(i) > 'E')
+		.forEach( d -> System.out.printf("%c ", d));
+		
+		System.out.println("\n--------------------------------------");
+		int maxSeats=100;
+		int seatsInRow=10;
+		var stream= Stream.iterate(0, i -> i < maxSeats, i -> i + 1)
+				.map(i -> new Seat((char) ('A' + i / seatsInRow), i % seatsInRow + 1))
+				.mapToDouble(Seat::price)
+				.mapToObj("%.2f"::formatted);
+		
+		stream.forEach(System.out::println);
+		
+		
+
+	}
+
+}
